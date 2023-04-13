@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <a href="{{ url_for('index') }}">Painel de Controle</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+
+    <h1>Criar Usuário</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username }}
+        {{ form.password }}
+        <button type="submit">Criar</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+{% endblock %}

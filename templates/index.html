@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Painel de Controle
+{% endblock %}
+
+{% block main %}
+    <a href="{{ url_for('register') }}">Criar Usuário</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+    
+    <h1>Painel de Controle</h1>
+{% endblock %}
