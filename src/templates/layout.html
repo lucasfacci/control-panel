@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +8,9 @@
     <link href="{{ url_for('static', filename='css/bootstrap.min.css' ) }}" rel="stylesheet">
 </head>
 <body>
-    <div>
+    <div class="container">
         {% block main %}{% endblock %}
     </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </html>

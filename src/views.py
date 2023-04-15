@@ -13,10 +13,9 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if check_password_hash(user.password, form.password.data):
-                login_user(user)
-                return redirect(url_for('index'))
+        if user and check_password_hash(user.password, form.password.data):
+            login_user(user)
+            return redirect(url_for('index'))
         else:
             error_message = 'Usuário e/ou senha inválidos(as)!'
             return render_template("login.html",form=form, message=error_message)
