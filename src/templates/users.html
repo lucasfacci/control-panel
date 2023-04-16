@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Painel de Controle
+    Login
 {% endblock %}
 
 {% block main %}
+    <a href="{{ url_for('index') }}">Painel de Controle</a>
     <a href="{{ url_for('register') }}">Criar Usuário</a>
-    <a href="{{ url_for('users') }}">Usuários</a>
     <a href="{{ url_for('logout') }}">Sair</a>
-    
-    <h1>Painel de Controle</h1>
+
+    <h1>Usuários</h1>
 {% endblock %}
