@@ -30,9 +30,12 @@ def register():
 
     if request.method == 'POST':
         if form.validate_on_submit():
-            if form.password.data == form.password_confirm.data:
-                db.session.add(User(username=form.username.data, password=generate_password_hash(form.password.data)))
+            if User.query.filter_by(username=form.username.data).first():
+                return render_template('register.html', form=form, error_message='Este nome de usuário já existe!')
+            elif form.password.data == form.password_confirm.data:
+                db.session.add(User(username=form.username.data, password=generate_password_hash(form.password.data), is_admin=form.is_admin.data))
                 db.session.commit()
+                form.username.data = ''
                 return render_template('register.html', form=form, success_message='Usuário criado com sucesso!')
             else:
                 return render_template("register.html", form=form, error_message='As senhas não correspondem!')
