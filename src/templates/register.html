@@ -8,7 +8,9 @@
     <div class="fixed-top">
         <div class="container">
             <a href="{{ url_for('index') }}">Painel de Controle</a>
-            <a href="{{ url_for('users') }}">Usuários</a>
+            {% if user.is_admin %}  
+                <a href="{{ url_for('admin') }}">Administração</a>
+            {% endif %}
             <a href="{{ url_for('logout') }}">Sair</a>
         </div>
     </div>

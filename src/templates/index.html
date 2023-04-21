@@ -6,7 +6,9 @@
 
 {% block main %}
     <a href="{{ url_for('register') }}">Criar Usuário</a>
-    <a href="{{ url_for('users') }}">Usuários</a>
+    {% if user.is_admin %}  
+        <a href="{{ url_for('admin') }}">Administração</a>
+    {% endif %}
     <a href="{{ url_for('logout') }}">Sair</a>
     
     <h1>Painel de Controle</h1>

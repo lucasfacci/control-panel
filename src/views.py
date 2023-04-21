@@ -1,6 +1,6 @@
-from flask import request, render_template, redirect, url_for
-from flask_login import login_user, logout_user, login_required
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import abort, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user 
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import app, db
 from .forms import LoginForm, RegisterForm
@@ -56,7 +56,10 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/users')
+@app.route('/admin')
 @login_required
-def users():
-    return render_template('users.html')
+def admin():
+    if current_user.is_admin:
+        return render_template('admin.html')
+    else:
+        abort(404)

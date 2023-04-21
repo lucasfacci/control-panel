@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Login
+    Administração
 {% endblock %}
 
 {% block main %}
@@ -9,5 +9,9 @@
     <a href="{{ url_for('register') }}">Criar Usuário</a>
     <a href="{{ url_for('logout') }}">Sair</a>
 
-    <h1>Usuários</h1>
+    <h1>Administração</h1>
+
+    <div>
+        <a>Usuários</a>
+    </div>
 {% endblock %}
