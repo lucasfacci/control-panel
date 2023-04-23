@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Usuários
+{% endblock %}
+
+{% block main %}
+    <a href="{{ url_for('index') }}">Painel de Controle</a>
+    <a href="{{ url_for('register') }}">Criar Usuário</a>
+    {% if user.is_admin %}  
+        <a href="{{ url_for('admin') }}">Administração</a>
+    {% endif %}
+    <a href="{{ url_for('logout') }}">Sair</a>
+
+    <h1>Usuários</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Administrador?</th>
+                <th scope="col">Ativo?</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.username }}</td>
+                    {% if user.is_admin %}
+                        <td>Sim</td>
+                    {% else %}
+                        <td>Não</td>
+                    {% endif %}
+                    {% if user.is_active %}
+                        <td>Sim</td>
+                    {% else %}
+                        <td>Não</td>
+                    {% endif %}
+                    <td>
+                        <button>&#128221;</button>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('users', user_id=user.id) }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">&#10060;</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

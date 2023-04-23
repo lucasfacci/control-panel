@@ -1,5 +1,5 @@
 from flask import abort, redirect, render_template, request, url_for
-from flask_login import current_user, login_required, login_user 
+from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import app, db
@@ -61,5 +61,21 @@ def index():
 def admin():
     if current_user.is_admin:
         return render_template('admin.html')
+    else:
+        abort(404)
+
+
+@app.route('/users', defaults={'user_id': None})
+@app.route('/users/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def users(user_id):
+    if current_user.is_admin:
+        if request.form.get('_method') == 'DELETE':
+            user = User.query.get(user_id)
+            db.session.delete(user)
+            db.session.commit()
+            return redirect(url_for('users'))
+        users = User.query.all()
+        return render_template('users.html', users=users)
     else:
         abort(404)
